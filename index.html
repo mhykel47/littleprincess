@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Little Princess 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #5a2a2a;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #e6e6fa, #ffffff, #ffb3ba);
+            min-height: 100vh;
+        }
+
+        h1, h2 {
+            font-family: 'Great Vibes', cursive;
+            color: #d32f2f;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        #hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .floating-heart {
+            position: fixed;
+            font-size: 24px;
+            animation: heartFloat 6s linear infinite;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) translateX(-50%) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) translateX(50%) rotate(180deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(-150%) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        #musicControls {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #musicControls button {
+            padding: 6px 12px;
+            font-size: 14px;
+            background-color: #e6e6fa;
+            color: #d32f2f;
+        }
+
+        #musicControls button:hover {
+            background-color: #d8bfd8;
+        }
+
+        .love-note {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        .heart-shape {
+            width: 120px;
+            height: 120px;
+            background-color: #d32f2f;
+            margin: 20px auto;
+            position: relative;
+            transform: rotate(-45deg);
+            border-radius: 15px;
+        }
+
+        .heart-shape::before,
+        .heart-shape::after {
+            content: '';
+            width: 120px;
+            height: 120px;
+            background-color: #d32f2f;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart-shape::before {
+            top: -60px;
+            left: 0;
+        }
+
+        .heart-shape::after {
+            left: 60px;
+            top: 0;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: transparent;
+            color: #d32f2f;
+            border: 2px solid #d32f2f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            .love-note {
+                font-size: 0.9rem;
+                bottom: 10px;
+            }
+            
+            .heart-shape {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .heart-shape::before,
+            .heart-shape::after {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .heart-shape::before {
+                top: -50px;
+            }
+            
+            .heart-shape::after {
+                left: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="love-note">Every moment with you is magical! ❤️</div>
+    <div id="musicControls">
+        <button onclick="toggleMusic()">🎵 Toggle Music</button>
+    </div>
+
+    <!-- Landing Page -->
+    <div class="container fade-in" id="landingPage">
+        <div class="heart-shape"></div>
+        <h1>From the moment you walked into my life...</h1>
+        <p>Everything became brighter, sweeter, and filled with love. Every smile you give, every laugh we share, and every moment we spend together reminds me just how lucky I am to have you.</p>
+        <p>I know you didn’t expect me to ask, but I was saving it for when you gave up (I mean, let me have a little fun 😂🤚🏾).</p>
+        <p>I have one important question for you… but first, let’s have a little fun! 😁</p>
+        <button onclick="startQuiz()">Take the Quiz</button>
+    </div>
+
+    <!-- Quiz Page -->
+    <div class="container" id="quizPage" style="display:none;">
+        <button class="back-button" onclick="goBack()">← Back</button>
+        <h2>Let's See How Well You Know Me! 💖</h2>
+        <div class="question">
+            <p>1. What’s my favorite thing about you?</p>
+            <label><input type="radio" name="q1" value="A"> Your beautiful eyes</label><br>
+            <label><input type="radio" name="q1" value="B"> Your adorable laugh</label><br>
+            <label><input type="radio" name="q1" value="C"> The way you always make me smile</label><br>
+            <label><input type="radio" name="q1" value="D"> All of the above (because you're perfect)</label><br>
+        </div>
+        <div class="question">
+            <p>2. If I could describe you in one word, it would be…</p>
+            <label><input type="radio" name="q2" value="A"> My little princess</label><br>
+            <label><input type="radio" name="q2" value="B"> Breathtaking</label><br>
+            <label><input type="radio" name="q2" value="C"> Irresistible</label><br>
+            <label><input type="radio" name="q2" value="D"> All of the above (because one word just isn't enough)</label><br>
+        </div>
+        <button onclick="validateQuiz()">Submit</button>
+    </div>
+
+    <!-- Result Page -->
+    <div class="container" id="resultPage" style="display:none;">
+        <button class="back-button" onclick="goBack()">← Back</button>
+        <h2>Be My Valentine? 💖</h2>
+        <button onclick="handleYes()">Yes</button>
+        <button id="noButton" onclick="handleNo()">No</button>
+    </div>
+
+    <!-- Yes Page -->
+    <div class="container" id="yesPage" style="display:none;">
+        <button class="back-button" onclick="goBack()">← Back</button>
+        <h2>YAY!! 🎉💖</h2>
+        <p>I wasn’t giving you the chance to say no. You know where to meet me, and I can’t wait to spend the weekend with you. 😘</p>
+        <p>Much love, your disney princess ❤️</p>
+    </div>
+
+    <div id="hearts-container"></div>
+
+    <script>
+        let musicPlaying = false;
+        const audio = new Audio('assets/audio.mp3');
+        audio.loop = true;
+        audio.volume = 0.3;
+        let pageHistory = ['landingPage'];
+        let heartInterval;
+
+        function toggleMusic() {
+            musicPlaying = !musicPlaying;
+            musicPlaying ? audio.play() : audio.pause();
+        }
+
+        document.body.addEventListener('click', () => {
+            if (!musicPlaying) {
+                audio.play();
+                musicPlaying = true;
+            }
+        }, { once: true });
+
+        function navigateTo(pageId) {
+            document.getElementById(pageHistory.slice(-1)[0]).style.display = 'none';
+            document.getElementById(pageId).style.display = 'block';
+            pageHistory.push(pageId);
+        }
+
+        function goBack() {
+            if (pageHistory.length > 1) {
+                const currentPage = pageHistory.pop();
+                document.getElementById(currentPage).style.display = 'none';
+                document.getElementById(pageHistory.slice(-1)[0]).style.display = 'block';
+            }
+        }
+
+        function startQuiz() {
+            navigateTo('quizPage');
+        }
+
+        function validateQuiz() {
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+
+            if (!q1 || !q2) {
+                alert("Please answer all questions before submitting! ❤️");
+                return;
+            }
+
+            if (q1.value === 'D' && q2.value === 'D') {
+                alert("hahaha!!! I knew you were cheesing 🤣");
+                navigateTo('resultPage');
+            } else {
+                alert("BOO!!! ❌\nRetake the quiz!");
+                document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+            }
+        }
+
+        let noClickedOnce = false;
+        function handleYes() {
+            navigateTo('yesPage');
+            triggerHearts();
+        }
+
+        function handleNo() {
+            if (!noClickedOnce) {
+                alert("I might have to punish you if you click no again...");
+                noClickedOnce = true;
+            } else {
+                handleYes();
+            }
+        }
+
+        document.getElementById('noButton').addEventListener('mouseover', function() {
+            if(!noClickedOnce) {
+                this.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+            }
+        });
+
+        function triggerHearts() {
+            if (heartInterval) clearInterval(heartInterval);
+            heartInterval = setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = ['❤️', '💖', '💕'][Math.floor(Math.random() * 3)];
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            const size = Math.random() * 20 + 30;
+            heart.style.fontSize = size + 'px';
+            
+            const duration = Math.random() * 4 + 4;
+            heart.style.animationDuration = duration + 's';
+            
+            heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            document.getElementById('hearts-container').appendChild(heart);
+
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+    </script>
+</body>
+</html>
